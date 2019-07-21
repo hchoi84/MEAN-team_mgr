@@ -1,0 +1,35 @@
+<input type="text" #myInput [(ngModel)]="searchName" (input)="Search()" placeholder="Search by Name">
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col" (click)="sortAtoZ()">
+                Name 
+                <span [ngClass]="{ 'up': nameAsc === true, 'down': nameAsc === false}"></span>
+            </th>
+            <th scope="col" (click)="sortDate()">
+                Since
+                <span [ngClass]="{ 'up': dateDesc === true, 'down': dateDesc === false}"></span>
+            </th>
+            <th scope="col">Days</th>
+            <th scope="col">Position</th>
+            <th scope="col">Actions</th>
+        </tr>
+    </thead>
+    <tbody *ngFor="let player of allPlayers">
+        <tr>
+            <th scope="row">
+                <a [routerLink]="['/players', player._id]">
+                {{ player.name }}
+                </a>
+            </th>
+                
+            <td>{{ player.createdAt | date }}</td> 
+            <!-- date converts it to local -->
+            <td>{{ getDateDiff(player.createdAt) }}</td>
+            <td>{{ player.pos }}</td>
+            <td>
+                <button (click)="deletePlayer(player._id)" class="btn btn-primary">DELETE</button>
+            </td>
+        </tr>
+    </tbody>
+</table>

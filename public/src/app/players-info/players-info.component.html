@@ -1,0 +1,100 @@
+<h1>{{ player.name }}</h1>
+
+<div class="player_info_box">
+    <div class="left_side">
+        <h4>Player Info</h4>
+        <div class="form-group row">
+            <p class="col-sm-4 col-form-label">Position</p>
+            <div class="col-sm-6">
+                <p class="form-control-plaintext">{{ player.pos }}</p>
+            </div>
+        </div>
+        <div class="form-group row">
+            <p class="col-sm-4 col-form-label">Game1 Status</p>
+            <div class="col-sm-6">
+                <p class="form-control-plaintext">{{ game1 }}</p>
+            </div>
+        </div>
+        <div class="form-group row">
+            <p class="col-sm-4 col-form-label">Game2 Status</p>
+            <div class="col-sm-6">
+                <p class="form-control-plaintext">{{ game2 }}</p>
+            </div>
+        </div>
+        <div class="form-group row">
+            <p class="col-sm-4 col-form-label">Game3 Status</p>
+            <div class="col-sm-6">
+                <p class="form-control-plaintext">{{ game3 }}</p>
+            </div>
+        </div>
+        <div class="form-group row">
+            <p class="col-sm-4 col-form-label">Team Since</p>
+            <div class="col-sm-6">
+                <p class="form-control-plaintext">{{ player.createdAt | date }} | {{ getDateDiff(player.createdAt) }}</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="right_side">
+        <h4>Leave a Comment</h4>
+        <form (submit)=submitComment()>
+            <div class="form-group row">
+                <label for="subjct" class="col-sm-4 col-form-label">Display Name</label>
+                <div class="col-sm-6">
+                    <input name="name" type="text" class="form-control" id="subjct" [(ngModel)]="comment.name">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="subjct" class="col-sm-4 col-form-label">Subject</label>
+                <div class="col-sm-6">
+                    <input name="subject" type="text" class="form-control" id="subjct" [(ngModel)]="comment.subject">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="comment" class="col-sm-4 col-form-label">Comment</label>
+                <div class="col-sm-6">
+                    <textarea name="content" type="text" class="form-control" id="comment" [(ngModel)]="comment.content"></textarea>
+                </div>
+            </div>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+</div>
+
+<h4>Comments</h4>
+<div *ngFor="let comment of comments">
+    <div class="form-group row">
+        <p class="col-sm-4 col-form-label">Name</p>
+        <div class="col-sm-6">
+            <p class="form-control-plaintext">{{ comment.name }}</p>
+        </div>
+    </div>
+    <div class="form-group row">
+        <p class="col-sm-4 col-form-label">Subject</p>
+        <div class="col-sm-6">
+            <p class="form-control-plaintext">{{ comment.subject }}</p>
+        </div>
+    </div>
+    <div class="form-group row">
+        <p class="col-sm-4 col-form-label">Comment</p>
+        <div class="col-sm-6">
+            <p class="form-control-plaintext">{{ comment.content }}</p>
+        </div>
+    </div>
+    <div class="form-group row">
+        <p class="col-sm-4 col-form-label">Posted On</p>
+        <div class="col-sm-6">
+            <p class="form-control-plaintext">{{ comment.createdAt | date }}</p>
+        </div>
+    </div>
+    <div class="form-group row">
+        <p class="col-sm-4 col-form-label">
+            <button (click)="addLike(comment)">Like</button> | 
+            <button (click)="addDislike(comment)">Dislike</button> |
+            <button (click)="deleteComment(comment._id)">Delete</button>
+        </p>
+        <div class="col-sm-6">
+            <p class="form-control-plaintext">{{ comment.likes }} | {{ comment.dislikes }}</p>
+        </div>
+    </div>
+</div>

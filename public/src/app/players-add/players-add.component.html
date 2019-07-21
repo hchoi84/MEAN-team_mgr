@@ -1,0 +1,41 @@
+<form (submit)="createPlayer()">
+  <div class="form-group row">
+    <label for="name" class="col-sm-5 col-form-label">Player Name</label>
+    <div class="col-sm-5">
+      <input
+        name="name" 
+        type="text" 
+        class="form-control" 
+        id="name"
+        placeholder="Required"
+        required minlength="3"
+        maxlength="30"
+        [(ngModel)]="player.name"
+        #name="ngModel"
+      >
+      <!-- <span *ngIf="name.errors">{{ name.errors | json }}</span> -->
+      <span *ngIf="name.errors">Required: 3-30 characters</span>
+      <small class="form-text text-muted" *ngIf="message">{{message.name}}</small>
+      <!-- <span *ngIf="!name.valid">{{ name.valid | json }}</span> -->
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="pos" class="col-sm-5 col-form-label">Preferred Position</label>
+    <div class="col-sm-5">
+      <input 
+        name="pos" 
+        type="text" 
+        class="form-control" 
+        id="pos" 
+        placeholder="Optional"
+        minlength="3"
+        maxlength="30"
+        [(ngModel)]="player.pos"
+        #pos="ngModel"
+      >
+      <span *ngIf="pos.errors">{{ pos.errors | json }}</span>
+      <!-- <small class="form-text text-muted">We'll never share your email with anyone else.</small> -->
+    </div>
+  </div>
+  <button *ngIf="pos.valid && name.valid" class="btn btn-primary">ADD</button>
+</form>

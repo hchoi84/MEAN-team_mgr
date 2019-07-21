@@ -1,0 +1,18 @@
+.player_info_box{
+    display: flex;
+    justify-content: space-between;
+}
+.left_side{
+    width: 49%;
+}
+.right_side{
+    width: 49%;
+}
+.row{
+    margin: auto;
+    width: auto;
+    justify-content: center;
+}
+.form-check-inline{
+    margin-top: 3px;
+}
